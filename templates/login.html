@@ -1,3 +1,4 @@
+{% extends "layout.html" %} {% block body %}
 <h1>{{ title }}</h1>
 <form method="post">
   {{ form.hidden_tag() }} {{ form.username.label }} {{ form.username(size=20) }}
@@ -6,3 +7,4 @@
   {% endfor %} {{ form.password.label }} {{ form.password(size=20) }} {{
   form.submit() }}
 </form>
+{% endblock %}

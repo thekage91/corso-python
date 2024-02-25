@@ -54,9 +54,13 @@ def login():
 def home():
     return render_template('home.html')
 
-@app.route('/forgot-password', methods=['GET'])
+@app.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
     form = ForgotPasswordForm()
+    if form.validate_on_submit():
+        # Qui si gestirebbe il recupero della password
+        flash('Ti abbiamo inviato un\'email con le istruzioni per recuperare la password', 'info')
+        return redirect(url_for('login'))
     return render_template('forgot-password.html', title='Recupera la tua password', form=form)
 
 if __name__ == '__main__':
