@@ -24,6 +24,13 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=4, max=20)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6)])
     submit = SubmitField('Login')
+    
+class ForgotPasswordForm(FlaskForm):
+    """
+    Form di Forgot Password
+    """
+    email = StringField('Email', validators=[DataRequired(), Email(message='Email non valida')])
+    submit = SubmitField('Recuperare la password?')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -46,6 +53,11 @@ def login():
 @app.route('/home')
 def home():
     return render_template('home.html')
+
+@app.route('/forgot-password', methods=['GET'])
+def forgot_password():
+    form = ForgotPasswordForm()
+    return render_template('forgot-password.html', title='Recupera la tua password', form=form)
 
 if __name__ == '__main__':
     app.run(debug=True)
